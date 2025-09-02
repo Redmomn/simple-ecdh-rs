@@ -2,6 +2,10 @@
 name = "simple-ecdh"
 version = "0.1.0"
 edition = "2024"
+description = "A simple ecdh implementation for rust"
+repository = "https://github.com/Redmomn/simple-ecdh-rs"
+readme = "README.md"
+license = "MIT"
 
 [dependencies]
 md-5 = "0.10.6"
