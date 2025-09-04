@@ -1,7 +1,9 @@
 use criterion::{Criterion, criterion_group, criterion_main};
+use pprof::criterion::{Output, PProfProfiler};
 use simple_ecdh::curve::PRIME256V1;
 use simple_ecdh::{Ecdh, KeyExchange};
 use std::hint::black_box;
+
 
 fn ecdh_keygen_benchmark(c: &mut Criterion) {
     let curve_p256 = &PRIME256V1.clone();
@@ -40,10 +42,9 @@ fn ecdh_key_exchange_benchmark(c: &mut Criterion) {
 }
 
 // 组合所有基准测试组
-criterion_group!(
-    benches,
-    ecdh_keygen_benchmark,
-    ecdh_pack_public_benchmark,
-    ecdh_key_exchange_benchmark
-);
+criterion_group! {
+    name = benches;
+    config = Criterion::default().with_profiler(PProfProfiler::new(100, Output::Flamegraph(None)));
+    targets = ecdh_keygen_benchmark, ecdh_pack_public_benchmark, ecdh_key_exchange_benchmark
+}
 criterion_main!(benches);
