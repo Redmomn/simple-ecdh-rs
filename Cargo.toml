@@ -1,19 +1,17 @@
 [package]
 name = "simple-ecdh"
-version = "0.1.1"
+version = "0.2.0"
 edition = "2024"
 description = "A simple ecdh implementation for rust"
 repository = "https://github.com/Redmomn/simple-ecdh-rs"
+keywords = ["ecdh", "elliptic-curve", "cryptography"]
 readme = "README.md"
 license = "MIT"
 
 [dependencies]
+crypto-bigint = { version = "0.6.1", features = ["rand"] }
 md-5 = "0.10.6"
-num-bigint = "0.4.6"
-num-integer = "0.1.46"
-num-traits = "0.2.19"
-once_cell = "1.21.3"
-rand = "0.8.5"
+thiserror = "2.0.17"
 
 [dev-dependencies]
 criterion = "0.7.0"

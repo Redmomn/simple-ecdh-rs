@@ -13,17 +13,6 @@ fn ecdh_keygen_benchmark(c: &mut Criterion) {
     });
 }
 
-fn ecdh_pack_public_benchmark(c: &mut Criterion) {
-    let curve_p256 = &PRIME256V1.clone();
-    let ecdh = Ecdh::new(curve_p256.clone()).unwrap();
-    c.bench_function("ECDH 公钥打包", |b| {
-        b.iter(|| {
-            // black_box 确保输入参数不会被优化
-            let _public_key = black_box(ecdh.pack_public(false)).unwrap();
-        });
-    });
-}
-
 fn ecdh_key_exchange_benchmark(c: &mut Criterion) {
     let curve_p256 = &PRIME256V1.clone();
     let alice = Ecdh::new(curve_p256.clone()).unwrap();
@@ -40,10 +29,5 @@ fn ecdh_key_exchange_benchmark(c: &mut Criterion) {
 }
 
 // 组合所有基准测试组
-criterion_group!(
-    benches,
-    ecdh_keygen_benchmark,
-    ecdh_pack_public_benchmark,
-    ecdh_key_exchange_benchmark
-);
+criterion_group!(benches, ecdh_keygen_benchmark, ecdh_key_exchange_benchmark);
 criterion_main!(benches);
